@@ -18,7 +18,7 @@ function secondsToMinutesSeconds(seconds) {
 
 async function getSong(folder) {
   currFolder = folder;
-  let a = await fetch(`http://127.0.0.1:5500/${folder}/`);
+  let a = await fetch(`https://rathod-deven.github.io/Spotify-Clone/${folder}/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -81,7 +81,7 @@ const playmusic = (track, pause = false) => {
 };
 
 async function DispalyAlbums() {
-  let a = await fetch(`http://127.0.0.1:5500/songs/`);
+  let a = await fetch(`https://rathod-deven.github.io/Spotify-Clone/songs/`);
   let response = await a.text();
   let div = document.createElement("div");
   div.innerHTML = response;
@@ -90,7 +90,7 @@ async function DispalyAlbums() {
   Array.from(anchors).forEach(async (e) => {
     if (e.href.includes("/song")) {
       let folder = e.href.split("/").slice(-2)[1];
-      let a = await fetch(`http://127.0.0.1:5500/songs/${folder}/info.json`);
+      let a = await fetch(`https://rathod-deven.github.io/Spotify-Clone/songs/${folder}/info.json`);
       let response = await a.json();
 
       cardcontainer.innerHTML =
