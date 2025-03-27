@@ -30,6 +30,7 @@ async function getSong(jsonFileUrl) {
       // Extract the song filename from the URL (assumes the URL points directly to a file)
       let songName = url.split('/').pop();  // Get the last part of the URL as the song name
       songs.push(songName);
+      console.log(songName);
     });
 
     // Get the <ul> element to populate the songs
@@ -54,6 +55,9 @@ async function getSong(jsonFileUrl) {
         </li>
       `;
     });
+
+    console.log(songs);
+    console.log(songUL);
 
     // Add click event listeners to each song
     Array.from(songUL.getElementsByTagName("li")).forEach((li, index) => {
