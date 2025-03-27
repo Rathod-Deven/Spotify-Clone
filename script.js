@@ -53,12 +53,15 @@ async function displaySongs(songNames, UrlPrefix) {
         `;
     });
 
-    Array.from(songListElem.getElementsByTagName("li")).forEach(li => {
+    let songElems = Array.from(songListElem.getElementsByTagName("li"))
+    songElems.forEach(li => {
         li.addEventListener("click", (e) => {
             let url = li.getAttribute("songurl");
             playMusic(url);
         });
     });
+
+    return songElems;
 }
 
 async function displayAlbums(playlists) {
@@ -81,7 +84,8 @@ async function displayAlbums(playlists) {
             let folder = item.currentTarget.dataset.folder;
             let songs = playlists[folder].songs;
             console.log(`Loading songs for ${folder}:`, songs);
-            await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
+            songs = await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
+            songs[0].click();
         });
     });
 }
