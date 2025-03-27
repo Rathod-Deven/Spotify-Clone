@@ -13,6 +13,8 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="utility.css" />
     <title>Spotify - Web Player: Music for everyone'</title>
+    <script src="utility.js"></script>
+    <script src="script.js"></script>
   </head>
   <body>
     <div class="Container flex bg-black">
@@ -108,28 +110,31 @@
             </div>
           </div>
           <div class="abovebar">
-          <div class="song-info"></div>
-          <div class="song-btn">
+          <div class="song-info w-25"></div>
+          <div class="song-btn w-25">
             <i id="pre" class="fa-solid fa-backward"></i>
+            
             <div class="song-play">
-            <i id="play" class="fa-solid fa-circle-play"></i>
-          </div>
+              <i id="play" class="fa-solid fa-circle-play"></i>
+            </div>
+            
             <i id="next" class="fa-solid fa-forward"></i>
+            
             <div class="volume">
               <i class="fa-solid fa-volume-high"></i>
               <div class="range">
                 <input type="range" name="volume">
               </div>
             </div>
+          
           </div>
           <!-- <div class="time-vol"> -->
-          <div class="song-time"></div>
+          <div class="song-time w-25"></div>
 
         <!-- </div> -->
         </div>
         </div>
       </div>
     </div>
-    <script src="script.js"></script>
   </body>
 </html>
