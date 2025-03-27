@@ -1,4 +1,12 @@
+const DATABASE_URL = getURLOrigin() + "/database.json";
+
 let AudioPlayer = new Audio();
+
+async function getDataFromDatabase() {
+    let res = await fetch(DATABASE_URL);
+    let data = await res.json();
+    return data;
+}
 
 async function playmusic(songurl, pause = false) {
     AudioPlayer.src = songurl;
@@ -6,17 +14,17 @@ async function playmusic(songurl, pause = false) {
     if (!pause) {
         AudioPlayer.play();
   
-      const playPauseButton = document.querySelector(".song-play");
+      const playPauseButtonElem = document.querySelector(".song-play");
       const playIconClass = "fa-solidfa-pause";
       const pauseIconClass = "fa-pause";
   
-      const iconElement = playPauseButton.querySelector("i");
+      const iconElem = playPauseButtonElem.querySelector("i");
   
-      iconElement.classList.remove(playIconClass);
-      iconElement.classList.add(pauseIconClass);
+      iconElem.classList.remove(playIconClass);
+      iconElem.classList.add(pauseIconClass);
     }
   
-    document.querySelector(".song-info").innerHTML = track;
+    document.querySelector(".song-info").innerHTML = songurl.split("/").pop();
     document.querySelector(".song-time").innerHTML = "00:00 / 00:00";
 };
 
@@ -26,7 +34,7 @@ async function displaySongs(songNames, UrlPrefix) {
     songListElem.innerHTML = "";
 
     songNames.forEach(songname => {
-        let songurl = UrlPrefix + songname;
+        let songurl = `${UrlPrefix}/${songname}`;
 
         songListElem.innerHTML += `
             <li songurl="${songurl}">
@@ -58,7 +66,7 @@ async function main() {
     let data = await getDataFromDatabase();
     console.log(data);
 
-    await displaySongs(data.songs.cs, "http://localhost:8000/songs/cs/");
+    await displaySongs(data.songs.cs, getURLOrigin() + "/songs/cs");
 }
 
 document.addEventListener('DOMContentLoaded', () => main());

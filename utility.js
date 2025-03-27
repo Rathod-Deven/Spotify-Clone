@@ -1,18 +1,9 @@
-const DATABASE_URL = window.location.origin + "/Spotify-Clone/database.json";
-
-async function getDatabaseURL() {
-    let url = localStorage.getItem("DATABASE_URL");
+function getURLOrigin() {
+    let devOriginUrl = localStorage.getItem("DEV_ORIGIN_URL_SUFFIX");
     
-    if (url) {
-        return url;
+    if (devOriginUrl) {
+        return devOriginUrl;
     } else {
-        return DATABASE_URL;
+        return window.location.origin + "/Spotify-Clone";
     }
-}
-
-async function getDataFromDatabase() {
-    let url = await getDatabaseURL();
-    let res = await fetch(url);
-    let data = await res.json();
-    return data;
 }
