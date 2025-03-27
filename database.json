@@ -1,6 +1,15 @@
 {
     "url": "https://rathod-deven.github.io/Spotify-clone",
     "playlists": {
+        "radhakrishna": {
+            "coverimg": "cover.jpg",
+            "title": "RadhaKrishna",
+            "description": "Forget Your Worries!!",
+            "songs": [
+                "Gori_Radha_Ne_Kalo_Kaan.mp3",
+                "Gori_Tame_Manda_Lidha_Mohi_Raj.mp3"
+            ]
+        },
         "cs": {
             "coverimg": "cover.jpg",
             "title": "CS",
@@ -58,8 +67,8 @@
         },
         "gujarati": {
             "coverimg": "cover.jpg",
-            "title": "Happy hits",
-            "description": "Hit Hindi Songs",
+            "title": "Gujarati",
+            "description": "Enjoy the Folk Music!!",
             "songs": [
                 "Charan_Kanya_Swarotsav_2019.m4a",
                 "Coke_Studio_Bharat__Khalasi__Aditya_Gadhvi_x_Achint.mp3",
