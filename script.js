@@ -129,7 +129,7 @@ async function getDataFromDatabase() {
 }
 
 async function main() {
-  console.log(getDataFromDatabase());
+  console.log(await getDataFromDatabase());
   await getSong("database.json");
   console.log(songs);
   playmusic(songs[0], true);
