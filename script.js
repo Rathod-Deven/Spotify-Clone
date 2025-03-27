@@ -8,7 +8,7 @@ async function getDataFromDatabase() {
     return data;
 }
 
-async function playmusic(songurl, pause = false) {
+async function playMusic(songurl, pause = false) {
     AudioPlayer.src = songurl;
     
     if (!pause) {
@@ -56,10 +56,10 @@ async function displaySongs(songNames, UrlPrefix) {
     Array.from(songListElem.getElementsByTagName("li")).forEach(li => {
         li.addEventListener("click", (e) => {
             let url = li.getAttribute("songurl");
-            playmusic(url);
+            playMusic(url);
         });
     });
-  }
+}
 
 
 async function main() {
