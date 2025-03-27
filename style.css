@@ -363,8 +363,12 @@ body {
   transition: left 0.5s;
 }
 
+.w-25 {
+  width: 25%;
+}
+
 .song-info {
-  width: 100px;
+  text-align: center;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -372,11 +376,11 @@ body {
 
 .abovebar {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 .song-time {
-  width: 100px;
+  text-align: center;
 }
 
 .volume {
