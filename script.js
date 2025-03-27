@@ -98,7 +98,6 @@ async function main() {
     let currentAlbumSongs = data.playlists.radhakrishna.songs;
 
     currentAlbumSongListElem = await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/radhakrishna");
-    console.log(currentAlbumSongListElem);
     await displayAlbums(data.playlists);
 
     const playPauseButtonElem = document.querySelector(".song-play");
