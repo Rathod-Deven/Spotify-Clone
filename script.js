@@ -1,7 +1,6 @@
 const DATABASE_URL = getURLOrigin() + "/database.json";
 
 let AudioPlayer = new Audio();
-let currentAlbumSongListElem = undefined;
 
 async function getDataFromDatabase() {
     let res = await fetch(DATABASE_URL);
@@ -62,6 +61,7 @@ async function displaySongs(songNames, UrlPrefix) {
         });
     });
 
+    songElems[0].click();
     return songElems;
 }
 
@@ -86,7 +86,6 @@ async function displayAlbums(playlists) {
             let songs = playlists[folder].songs;
             console.log(`Loading songs for ${folder}:`, songs);
             currentAlbumSongListElem = await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
-            currentAlbumSongListElem[0].click();
         });
     });
 }
@@ -96,8 +95,9 @@ async function main() {
     console.log(data);
 
     let currentAlbumSongs = data.playlists.radhakrishna.songs;
+    console.log(currentAlbumSongs);
 
-    currentAlbumSongListElem = await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/radhakrishna");
+    await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/radhakrishna");
     await displayAlbums(data.playlists);
 
     const playPauseButtonElem = document.querySelector(".song-play");
