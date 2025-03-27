@@ -65,7 +65,9 @@ async function main() {
     let data = await getDataFromDatabase();
     console.log(data);
 
-    await displaySongs(data.songs.cs, getURLOrigin() + "/songs/cs");
+    let currentAlbumSongs = data.songs.cs;
+
+    await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/cs");
 
     const playPauseButtonElem = document.querySelector(".song-play");
     const playIconClass = "fa-solidfa-pause";
@@ -103,6 +105,26 @@ async function main() {
     document.querySelector(".close").addEventListener("click", () => {
         document.querySelector(".left").style.left = "-120%";
     });
+
+    // pre.addEventListener("click", () => {
+    //     let index = currentAlbumSongs.indexOf(AudioPlayer.src.split("/").pop());
+        
+    //     if (index >= 0) {
+    //         playMusic();
+    //     } else {
+    //         console.log("No previous song found.");
+    //     }
+    // });
+    
+    // next.addEventListener("click", () => {
+    //     let index = currentAlbumSongs.indexOf(AudioPlayer.src.split("/").pop());
+        
+    //     if (index + 1 < currentAlbumSongs.length) {
+    //         playMusic(currentAlbumSongs[index + 1]);
+    //     } else {
+    //         console.log("No next song found.");
+    //     }
+    // });
 }
 
 document.addEventListener('DOMContentLoaded', () => main());
