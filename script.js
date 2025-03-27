@@ -1,6 +1,6 @@
 let currentsong = new Audio();
 let songs = [];
-let currFolder = "";
+let currFolder = "/songs/cs/";
 
 function secondsToMinutesSeconds(seconds) {
   if (isNaN(seconds) || seconds < 0) {
@@ -69,7 +69,7 @@ async function getSong(jsonFileUrl) {
 }
 
 const playmusic = (track, pause = false) => {
-   currentsong.src = track;
+   currentsong.src = currFolder + track;
    if (!pause) {
      currentsong.play();
  
