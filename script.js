@@ -125,6 +125,13 @@ async function main() {
     //         console.log("No next song found.");
     //     }
     // });
+
+    document
+        .querySelector(".range")
+        .getElementsByTagName("input")[0]
+        .addEventListener("change", (e) => {
+            AudioPlayer.volume = parseInt(e.target.value) / 100;
+        });
 }
 
 document.addEventListener('DOMContentLoaded', () => main());
