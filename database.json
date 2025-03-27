@@ -1,0 +1,17 @@
+{
+    "url": "https://rathod-deven.github.io/Spotify-clone/songs",
+    "songs": {
+        "cs": [
+            "Alappara_Theme.mp3",
+            "BB_Music_Baby_Stop.mp3",
+            "CJ_Whoopty.mp3",
+            "Dallas_Superpowers.mp3",
+            "Time_Back.mp3",
+            "Visuals.mp3"
+        ],
+        "dark": [
+            "AUR_-_TU_HAI_KAHAN.m4a",
+            "Babam_Bam_Paradox__Hustle_2.0.mp3"
+        ]
+    }
+}
