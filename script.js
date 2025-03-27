@@ -61,13 +61,39 @@ async function displaySongs(songNames, UrlPrefix) {
     });
 }
 
+async function displayAlbums(playlists) {
+    let cardcontainer = document.querySelector(".cardcontainer");
+
+    Object.entries(playlists).forEach(([key, value]) => {
+        cardcontainer.innerHTML += `
+            <div class="card" data-folder="${key}">
+                <div class="play">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <img src="songs/${key}/${value.coverimg}" />
+                <h4>${value.title}</h4>
+                <p>${value.description}</p>
+            </div>`;
+    });
+
+    Array.from(document.getElementsByClassName("card")).forEach((e) => {
+        e.addEventListener("click", async (item) => {
+            let folder = item.currentTarget.dataset.folder;
+            let songs = playlists[folder].songs;
+            console.log(`Loading songs for ${folder}:`, songs);
+            await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
+        });
+    });
+}
+
 async function main() {
     let data = await getDataFromDatabase();
     console.log(data);
 
-    let currentAlbumSongs = data.songs.cs;
+    let currentAlbumSongs = data.playlists.cs.songs;
 
     await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/cs");
+    await displayAlbums(data.playlists); 
 
     const playPauseButtonElem = document.querySelector(".song-play");
     const playIconClass = "fa-solidfa-pause";
