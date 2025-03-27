@@ -1,6 +1,7 @@
 const DATABASE_URL = getURLOrigin() + "/database.json";
 
 let AudioPlayer = new Audio();
+let currentAlbumSongListElem = undefined;
 
 async function getDataFromDatabase() {
     let res = await fetch(DATABASE_URL);
@@ -84,8 +85,8 @@ async function displayAlbums(playlists) {
             let folder = item.currentTarget.dataset.folder;
             let songs = playlists[folder].songs;
             console.log(`Loading songs for ${folder}:`, songs);
-            songs = await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
-            songs[0].click();
+            currentAlbumSongListElem = await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
+            currentAlbumSongListElem[0].click();
         });
     });
 }
@@ -94,10 +95,11 @@ async function main() {
     let data = await getDataFromDatabase();
     console.log(data);
 
-    let currentAlbumSongs = data.playlists.cs.songs;
+    let currentAlbumSongs = data.playlists.radhakrishna.songs;
 
-    await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/cs");
-    await displayAlbums(data.playlists); 
+    currentAlbumSongListElem = await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/radhakrishna");
+    console.log(currentAlbumSongListElem);
+    await displayAlbums(data.playlists);
 
     const playPauseButtonElem = document.querySelector(".song-play");
     const playIconClass = "fa-solidfa-pause";
@@ -115,6 +117,10 @@ async function main() {
             iconElement.classList.remove(pauseIconClass);
             iconElement.classList.add(playIconClass);
         }
+    });
+
+    AudioPlayer.addEventListener("ended", () => {
+        console.log("Audio has finished playing!");
     });
 
     AudioPlayer.addEventListener("timeupdate", () => {
