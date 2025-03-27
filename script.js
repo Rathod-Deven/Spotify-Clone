@@ -2,6 +2,8 @@ let currentsong = new Audio();
 let songs = [];
 let currFolder = "/Spotify-Clone/songs/cs/";
 
+const DATABASE_URL = window.location.origin + "/Spotify-Clone/database.json"
+
 function secondsToMinutesSeconds(seconds) {
   if (isNaN(seconds) || seconds < 0) {
     return "00:00";
@@ -120,8 +122,15 @@ const playmusic = (track, pause = false) => {
   });
 }
 
+async function getDataFromDatabase() {
+  let res = await fetch(DATABASE_URL);
+  let data = await res.json();
+  return data;
+}
+
 async function main() {
-  await getSong("main.json");
+  console.log(getDataFromDatabase());
+  await getSong("database.json");
   console.log(songs);
   playmusic(songs[0], true);
 
