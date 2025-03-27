@@ -1,4 +1,6 @@
-[
-    "https://rathod-deven.github.io/Spotify-clone/songs/cs/2Pac_-_Time_Back(256k).mp3",
-    "https://rathod-deven.github.io/Spotify-Clone/songs/cs/@20K_visuals)_[official_Video](256k).mp3"
+{
+    "cs": [
+        "https://rathod-deven.github.io/Spotify-clone/songs/cs/time_back.mp3",
+        "https://rathod-deven.github.io/Spotify-Clone/songs/cs/visuals.mp3"
+    ]
 ]
