@@ -119,6 +119,7 @@ const playmusic = (track, pause = false) => {
 
 async function main() {
   await getSong("main.json");
+  console.log(songs);
   playmusic(songs[0], true);
 
   DispalyAlbums();
@@ -214,4 +215,5 @@ async function main() {
     }
   });
 }
+
 main();
