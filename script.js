@@ -22,9 +22,6 @@ async function getSong(jsonFileUrl) {
     let response = await fetch(jsonFileUrl);
     let songUrls = await response.json();
 
-    // Initialize an empty array for songs
-    let songs = [];
-
     // Loop through the array of song URLs and extract the song names
     songUrls.forEach(url => {
       // Extract the song filename from the URL (assumes the URL points directly to a file)
