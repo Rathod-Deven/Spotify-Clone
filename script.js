@@ -114,8 +114,10 @@ const playmusic = (track, pause = false) => {
          e.addEventListener("click", async (item) => {
            songs = await getSong(`songs/${item.currentTarget.dataset.folder}`);
          });
-       }
-});
+       });
+    }
+  });
+}
 
 async function main() {
   await getSong("main.json");
