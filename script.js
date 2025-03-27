@@ -1,5 +1,5 @@
 let currentsong = new Audio();
-let songs;
+let songs = [];
 let currFolder;
 
 function secondsToMinutesSeconds(seconds) {
