@@ -1,6 +1,6 @@
 let currentsong = new Audio();
 let songs = [];
-let currFolder = "/songs/cs/";
+let currFolder = "/Spotify-Clone/songs/cs/";
 
 function secondsToMinutesSeconds(seconds) {
   if (isNaN(seconds) || seconds < 0) {
