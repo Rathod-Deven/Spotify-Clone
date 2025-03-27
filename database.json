@@ -1,6 +1,15 @@
 {
     "url": "https://rathod-deven.github.io/Spotify-clone",
     "playlists": {
+        "radhakrishna": {
+            "coverimg": "cover.jpg",
+            "title": "RadhaKrishna",
+            "description": "Forget Your Worries!!",
+            "songs": [
+                "Gori_Radha_Ne_Kalo_Kaan.mp3",
+                "Gori_Tame_Manda_Lidha_Mohi_Raj.mp3"
+            ]
+        },
         "cs": {
             "coverimg": "cover.jpg",
             "title": "CS",
@@ -17,10 +26,57 @@
         "dark": {
             "coverimg": "cover.jpg",
             "title": "Dark Sadness",
-            "description": "Sad songs",
+            "description": "Feel!!",
             "songs": [
                 "AUR_-_TU_HAI_KAHAN.m4a",
-                "Babam_Bam_Paradox__Hustle_2.0.mp3"
+                "Babam_Bam_Paradox_Hustle_2.0.mp3",
+                "Baby_Calm_Down.m4a",
+                "Middle_Of_The_Night.m4a",
+                "Mi_Gente.m4a",
+                "Amplifie.mp3",
+                "Believer.m4a",
+                "Bones.m4a",
+                "Enemy.m4a",
+                "Thunder.m4a"
+            ]
+        },
+        "lofi": {
+            "coverimg": "cover.jpg",
+            "title": "Relax - Lofi",
+            "description": "Enjoy the Clammess!!",
+            "songs": [
+                "Aigiri_nandini.mp3",
+                "Desi_Kalakaar.mp3",
+                "SHIKAYAT.m4a",
+                "TU_HAI_KAHAN.m4a"
+            ]
+        },
+        "happy": {
+            "coverimg": "cover.jpg",
+            "title": "Happy hits",
+            "description": "Hit Hindi Songs",
+            "songs": [
+                "Banni_Rajasthani_Song.mp3",
+                "Chaleya.mp3",
+                "Dekha_Ek_Khwab_x_Laila.mp3",
+                "DIL_JAANIYE.mp3",
+                "Dil_Jhoom.mp3",
+                "Har_Funn_Maula.mp3",
+                "Hawa_Banke.mp3"
+            ]
+        },
+        "gujarati": {
+            "coverimg": "cover.jpg",
+            "title": "Gujarati",
+            "description": "Enjoy the Folk Music!!",
+            "songs": [
+                "Charan_Kanya_Swarotsav_2019.m4a",
+                "Coke_Studio_Bharat__Khalasi__Aditya_Gadhvi_x_Achint.mp3",
+                "DDG_Aadesh.m4a",
+                "Gujarati_love_mashup.mp3",
+                "Indian_Folk_Music.m4a",
+                "Shivaj.m4a",
+                "THE_SONG_OF_MAHARANA_PRATAP.mp3"
             ]
         }
     }

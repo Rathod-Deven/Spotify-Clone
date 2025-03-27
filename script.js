@@ -53,12 +53,16 @@ async function displaySongs(songNames, UrlPrefix) {
         `;
     });
 
-    Array.from(songListElem.getElementsByTagName("li")).forEach(li => {
+    let songElems = Array.from(songListElem.getElementsByTagName("li"))
+    songElems.forEach(li => {
         li.addEventListener("click", (e) => {
             let url = li.getAttribute("songurl");
             playMusic(url);
         });
     });
+
+    songElems[0].click();
+    return songElems;
 }
 
 async function displayAlbums(playlists) {
@@ -81,7 +85,7 @@ async function displayAlbums(playlists) {
             let folder = item.currentTarget.dataset.folder;
             let songs = playlists[folder].songs;
             console.log(`Loading songs for ${folder}:`, songs);
-            await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
+            currentAlbumSongListElem = await displaySongs(songs, getURLOrigin() + "/songs/" + folder);
         });
     });
 }
@@ -90,10 +94,11 @@ async function main() {
     let data = await getDataFromDatabase();
     console.log(data);
 
-    let currentAlbumSongs = data.playlists.cs.songs;
+    let currentAlbumSongs = data.playlists.radhakrishna.songs;
+    console.log(currentAlbumSongs);
 
-    await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/cs");
-    await displayAlbums(data.playlists); 
+    await displaySongs(currentAlbumSongs, getURLOrigin() + "/songs/radhakrishna");
+    await displayAlbums(data.playlists);
 
     const playPauseButtonElem = document.querySelector(".song-play");
     const playIconClass = "fa-solidfa-pause";
@@ -111,6 +116,10 @@ async function main() {
             iconElement.classList.remove(pauseIconClass);
             iconElement.classList.add(playIconClass);
         }
+    });
+
+    AudioPlayer.addEventListener("ended", () => {
+        console.log("Audio has finished playing!");
     });
 
     AudioPlayer.addEventListener("timeupdate", () => {
