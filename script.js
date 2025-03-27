@@ -67,9 +67,33 @@ async function main() {
 
     await displaySongs(data.songs.cs, getURLOrigin() + "/songs/cs");
 
+    const playPauseButtonElem = document.querySelector(".song-play");
+    const playIconClass = "fa-solidfa-pause";
+    const pauseIconClass = "fa-pause";
+
+    playPauseButtonElem.addEventListener("click", () => {
+        const iconElement = playPauseButtonElem.querySelector("i");
+        
+        if (AudioPlayer.paused) {
+            AudioPlayer.play();
+            iconElement.classList.remove(playIconClass);
+            iconElement.classList.add(pauseIconClass);
+        } else {
+            AudioPlayer.pause();
+            iconElement.classList.remove(pauseIconClass);
+            iconElement.classList.add(playIconClass);
+        }
+    });
+
     AudioPlayer.addEventListener("timeupdate", () => {
         document.querySelector(".song-time").innerHTML = `${secondsToMinutesSeconds(AudioPlayer.currentTime)} / ${secondsToMinutesSeconds(AudioPlayer.duration)}`;
         document.querySelector(".circle").style.left = (AudioPlayer.currentTime / AudioPlayer.duration) * 100 + "%";
+    });
+
+    document.querySelector(".seekbar").addEventListener("click", (e) => {
+        let percentage = (e.offsetX / e.target.getBoundingClientRect().width) * 100;
+        document.querySelector(".circle").style.left = percentage;
+        AudioPlayer.currentTime = (AudioPlayer.duration * percentage) / 100;
     });
 }
 
