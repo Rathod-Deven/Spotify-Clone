@@ -16,105 +16,60 @@ function secondsToMinutesSeconds(seconds) {
   return `${formettedMinutes}:${formettedseconds}`;
 }
 
-async function getSong(folder) {
-  currFolder = folder;
-  let a = await fetch(`https://rathod-deven.github.io/Spotify-Clone/${folder}/`);
-  let response = await a.text();
-  let div = document.createElement("div");
-  div.innerHTML = response;
-  let as = div.getElementsByTagName("a");
-  songs = [];
-  for (let index = 0; index < as.length; index++) {
-    const element = as[index];
-    if (element.href.endsWith(".mp3")) {
-      songs.push(element.href.split(`/${folder}/`)[1]);
-    }
-  }
+async function getSong(jsonFileUrl) {
+  try {
+    // Fetch the JSON file that contains an array of song URLs
+    let response = await fetch(jsonFileUrl);
+    let songUrls = await response.json();
 
-  let songUL = document
-    .querySelector(".songlist")
-    .getElementsByTagName("ul")[0];
+    // Initialize an empty array for songs
+    let songs = [];
 
-  songUL.innerHTML = "";
+    // Loop through the array of song URLs and extract the song names
+    songUrls.forEach(url => {
+      // Extract the song filename from the URL (assumes the URL points directly to a file)
+      let songName = url.split('/').pop();  // Get the last part of the URL as the song name
+      songs.push(songName);
+    });
 
-  for (const song of songs) {
-    songUL.innerHTML =
-      songUL.innerHTML +
-      `<li><i class="fa-solid fa-music"></i>
-        <div class="info">
-          <div>${song.replaceAll("%20", " ")}</div>
-          <div>Deven</div>
-        </div>
+    // Get the <ul> element to populate the songs
+    let songUL = document.querySelector(".songlist").getElementsByTagName("ul")[0];
+
+    // Clear the existing song list
+    songUL.innerHTML = "";
+
+    // Add each song to the list with a "Play Now" button
+    songs.forEach(song => {
+      songUL.innerHTML += `
+        <li>
+          <i class="fa-solid fa-music"></i>
+          <div class="info">
+            <div>${song.replaceAll("%20", " ")}</div>
+            <div>Deven</div>
+          </div>
           <div class="playnow">
             <span>Play Now</span>
             <i class="fa-regular fa-circle-play"></i>
-        </div>
-         </li>`;
-  }
-
-  Array.from(
-    document.querySelector(".songlist").getElementsByTagName("li")
-  ).forEach((e) => {
-    e.addEventListener("click", (Element) => {
-      playmusic(e.querySelector(".info").firstElementChild.innerHTML);
+          </div>
+        </li>
+      `;
     });
-  });
-}
 
-const playmusic = (track, pause = false) => {
-  currentsong.src = `/${currFolder}/` + track;
-  if (!pause) {
-    currentsong.play();
-
-    const playPauseButton = document.querySelector(".song-play");
-    const playIconClass = "fa-solidfa-pause";
-    const pauseIconClass = "fa-pause";
-
-    const iconElement = playPauseButton.querySelector("i");
-
-    iconElement.classList.remove(playIconClass);
-    iconElement.classList.add(pauseIconClass);
-  }
-
-  document.querySelector(".song-info").innerHTML = track;
-  document.querySelector(".song-time").innerHTML = "00:00 / 00:00";
-};
-
-async function DispalyAlbums() {
-  let a = await fetch(`https://rathod-deven.github.io/Spotify-Clone/songs/`);
-  let response = await a.text();
-  let div = document.createElement("div");
-  div.innerHTML = response;
-  let anchors = div.getElementsByTagName("a");
-  let cardcontainer = document.querySelector(".cardcontainer");
-  Array.from(anchors).forEach(async (e) => {
-    if (e.href.includes("/song")) {
-      let folder = e.href.split("/").slice(-2)[1];
-      let a = await fetch(`https://rathod-deven.github.io/Spotify-Clone/songs/${folder}/info.json`);
-      let response = await a.json();
-
-      cardcontainer.innerHTML =
-        cardcontainer.innerHTML +
-        ` <div data-folder="${folder}" class="card">
-     <div class="play">
-     <i class="fa-solid fa-play"></i>
-   </div>
-     <img src="/songs/${folder}/cover.jpg" />
-     <h4>${response.title}</h4>
-     <p>${response.description}</p>
-   </div>`;
-
-      Array.from(document.getElementsByClassName("card")).forEach((e) => {
-        e.addEventListener("click", async (item) => {
-          songs = await getSong(`songs/${item.currentTarget.dataset.folder}`);
-        });
+    // Add click event listeners to each song
+    Array.from(songUL.getElementsByTagName("li")).forEach((li, index) => {
+      li.addEventListener("click", () => {
+        playmusic(songUrls[index]);  // Use the URL from the songUrls array to play the song
       });
-    }
-  });
+    });
+    
+  } catch (error) {
+    console.error('Error fetching the song list:', error);
+  }
 }
+
 
 async function main() {
-  await getSong("songs/cs");
+  await getSong("main.json");
   playmusic(songs[0], true);
 
   DispalyAlbums();
