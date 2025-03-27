@@ -61,12 +61,16 @@ async function displaySongs(songNames, UrlPrefix) {
     });
 }
 
-
 async function main() {
     let data = await getDataFromDatabase();
     console.log(data);
 
     await displaySongs(data.songs.cs, getURLOrigin() + "/songs/cs");
+
+    AudioPlayer.addEventListener("timeupdate", () => {
+        document.querySelector(".song-time").innerHTML = `${secondsToMinutesSeconds(AudioPlayer.currentTime)} / ${secondsToMinutesSeconds(AudioPlayer.duration)}`;
+        document.querySelector(".circle").style.left = (AudioPlayer.currentTime / AudioPlayer.duration) * 100 + "%";
+    });
 }
 
 document.addEventListener('DOMContentLoaded', () => main());
